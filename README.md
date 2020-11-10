@@ -1,9 +1,9 @@
-# ERC-721_NFT_creation_demo
-how to create NFT's and populate them with additional attributes
+# ERC-1155_NFT_creation_demo
+how to create NFT's using ERC1155 and pay out part of provision at NFT sale to third party
 ## Installation procedure
 ```shell
-git clone https://github.com/ERC-721_NFT_creation_demo
-cd ERC-721_NFT_creation_demo
+git clone git clone https://github.com/matprime/ERC-1155-NFT-demo
+cd ERC-1155-NFT-demo
 npm install
 ```
 ## Compiling smart contract, deployment to blockchain and test
@@ -13,8 +13,9 @@ truffle migrate --reset
 truffle test
 ```
 Before deploying smart contracts to blockchain "truffle migrate --reset", you need to make sure that local Ethereum blockchain is running.
-Demo was tested with ganache-cli local blockchain, after installation of ganache-cli run it with command "ganache-cli"
-and you will get 10 Ethereum test account with test Ether to use for testing of demo.
+Demo was tested with ganache-cli local blockchain, and Matic Mumbai testnet
+after installation of ganache-cli run it with command "ganache-cli"
+and you will get 10 Ethereum test account filled with 100 test Ether to use for testing of demo.
 ## Starting demo
 ```shell
 npm run start

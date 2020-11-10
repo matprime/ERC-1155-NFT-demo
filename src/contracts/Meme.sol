@@ -1,6 +1,11 @@
-pragma solidity 0.5.0;
+pragma solidity ^0.6.0;
 
 import "./ERC721Full.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+
+contract Memes is ERC1155 {
+
+}
 
 contract Meme is ERC721Full {
   string[] public hashes;
