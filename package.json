@@ -4,7 +4,6 @@
   "description": "demo how to create NFT's ERC-721 and work with their additional attribute",
   "author": "matt@mattprime.com",
   "dependencies": {
-    "@openzeppelin/contracts": "^2.5.1",
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-preset-es2015": "6.24.1",
@@ -19,7 +18,7 @@
     "react-bootstrap": "1.0.0-beta.5",
     "react-dom": "16.8.4",
     "react-scripts": "2.1.3",
-    "truffle": "5.0.5",
+    "truffle": "^5.1.52",
     "truffle-flattener": "^1.5.0",
     "truffle-hdwallet-provider": "^1.0.17",
     "web3": "1.0.0-beta.55"
@@ -38,5 +37,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "@openzeppelin/contracts": "^2.5.1"
+  }
 }

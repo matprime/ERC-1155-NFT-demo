@@ -1,5 +1,5 @@
-const Meme = artifacts.require("Meme");
+const Memes = artifacts.require("Memes");
 
 module.exports = function(deployer) {
-  deployer.deploy(Meme);
+  deployer.deploy(Memes);
 };

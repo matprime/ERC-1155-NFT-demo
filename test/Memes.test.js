@@ -1,14 +1,14 @@
-const Meme = artifacts.require('./Meme.sol')
+const Memes = artifacts.require('./Memes.sol')
 
 require('chai')
   .use(require('chai-as-promised'))
   .should()
 
-contract('Meme', (accounts) => {
+contract('Memes', (accounts) => {
   let contract
 
   before(async () => {
-    contract = await Meme.deployed()
+    contract = await Memes.deployed()
   })
 
   describe('deployment', async () => {
@@ -18,16 +18,6 @@ contract('Meme', (accounts) => {
       assert.notEqual(address, '')
       assert.notEqual(address, null)
       assert.notEqual(address, undefined)
-    })
-
-    it('has a name', async () => {
-      const name = await contract.name()
-      assert.equal(name, 'Meme')
-    })
-
-    it('has a symbol', async () => {
-      const symbol = await contract.symbol()
-      assert.equal(symbol, 'MTD')
     })
 
   })
