@@ -13,8 +13,8 @@ truffle migrate --reset
 truffle test
 ```
 Before deploying smart contracts to blockchain "truffle migrate --reset", you need to make sure that local Ethereum blockchain is running.
-Demo was tested with ganache-cli local blockchain, and Matic Mumbai testnet
-after installation of ganache-cli run it with command "ganache-cli"
+Demo was tested with ganache-cli local blockchain, and Matic Mumbai testnet. <br/>
+To run tests on local Ethereum blockchain then first run ganache-cli with command "ganache-cli"
 and you will get 10 Ethereum test account filled with 100 test Ether to use for testing of demo.
 ## Starting demo
 ```shell
