@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Web3 from 'web3'
 import './App.css';
-import Meme from '../abis/Meme.json'
+import Meme from '../abis/Memes.json'
 
 class App extends Component {
 
@@ -36,7 +36,7 @@ class App extends Component {
       const address = networkData.address
       const contract = new web3.eth.Contract(abi, address)
       this.setState({ contract })
-      const totalSupply = await contract.methods.totalSupply().call()
+      const totalSupply = await contract.methods.getHashesCount().call()
       this.setState({ totalSupply })
       console.log('total supply')
       console.log(totalSupply)

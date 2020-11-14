@@ -49,10 +49,10 @@ contract('Memes', (accounts) => {
       const memesCount = await contract.getHashesCount()
       assert.equal(memesCount, 4)
 
-      //check hashes of minted NFTs
+
       let hash
       let result = []
-
+      //check indexing and hashes of minted NFTs
       for (var i = 1; i <= memesCount; i++) {
         hash = await contract.hashes(i - 1)
         result.push(hash)
