@@ -1,3 +1,4 @@
+const Web3 = require("web3")
 const Memes = artifacts.require('./Memes.sol')
 
 require('chai')
@@ -46,7 +47,7 @@ contract('Memes', (accounts) => {
       await contract.mint('234AEC00EFFD0')
 
       //check number of minted NFTs
-      const memesCount = await contract.getHashesCount()
+      const memesCount = await contract.getMemesCount()
       assert.equal(memesCount, 4)
 
 
@@ -62,5 +63,24 @@ contract('Memes', (accounts) => {
       assert.equal(result.join(','), expected.join(','))
     })
   })
+
+  describe('transfering', async () => {
+    it('transferring NFT', async () => {
+
+      let result = await contract.safeTransferFrom(accounts[0], accounts[2], 0, 1, "0x0")
+      const event = result.logs[0].args
+      assert.equal(event.to, accounts[2])
+    })
+  })
+
+  describe('selling', async () => {
+    it('selling NFT with provision', async () => {
+
+      let result = await contract.safeTransferFromWithProvision(accounts[0], accounts[2], 1, 1, web3.utils.toWei('100', 'Ether'))
+      const event = result.logs[0].args
+      assert.equal(event.to, accounts[3])
+    })
+  })
+
 
 })

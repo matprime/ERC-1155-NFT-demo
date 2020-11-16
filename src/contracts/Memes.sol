@@ -8,7 +8,10 @@ contract Memes is ERC1155 {
   string[] public hashes;
   mapping(string => bool) _hashExists;
 
+
   constructor() public ERC1155("") {
+    mint("hash1");
+    mint("hash2");
   }
 
   function mint(string memory _hash) public {
@@ -19,7 +22,21 @@ contract Memes is ERC1155 {
     _hashExists[_hash] = true;
   }
 
-  function getHashesCount() public view returns(uint count) {
+  function getMemesCount() public view returns(uint count) {
     return hashes.length;
   }
+
+  function safeTransferFromWithProvision(
+    address payable from,
+    address to,
+    uint256 id,
+    uint256 amount,
+    uint256 price
+  )
+    public
+  {
+    safeTransferFrom(from, to, id, amount, "0x0");
+    from.transfer(price);
+  }
+
 }

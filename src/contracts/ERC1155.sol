@@ -640,12 +640,6 @@ library Address {
 pragma solidity ^0.6.0;
 
 
-
-
-
-
-
-
 /**
  *
  * @dev Implementation of the basic standard multi-token.

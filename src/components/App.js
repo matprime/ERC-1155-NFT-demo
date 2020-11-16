@@ -36,7 +36,7 @@ class App extends Component {
       const address = networkData.address
       const contract = new web3.eth.Contract(abi, address)
       this.setState({ contract })
-      const totalSupply = await contract.methods.getHashesCount().call()
+      const totalSupply = await contract.methods.getMemesCount().call()
       this.setState({ totalSupply })
       console.log('total supply')
       console.log(totalSupply)
@@ -63,6 +63,10 @@ class App extends Component {
     console.log("mint is done")
   }
 
+  buy = (hash) => {
+    console.log("buy of NFT with hash: " + hash + " is done")
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -83,7 +87,7 @@ class App extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            NFT Tokens DEMO
+            ERC1155 NFT Tokens DEMO
           </a>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
@@ -122,6 +126,10 @@ class App extends Component {
               return(
                 <div key={key} className="col-md-3 mb-3">
                   <div>{hash}</div>
+                  <button type="submit" onClick={() => {
+                    this.buy(hash)}}>
+                    BUY
+                  </button>
                 </div>
               )
             })}
