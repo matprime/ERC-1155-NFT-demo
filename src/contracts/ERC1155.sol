@@ -635,8 +635,21 @@ library Address {
     }
 }
 
-// File: openzeppelin-contracts-master/contracts/token/ERC1155/ERC1155.sol
+// @dev Implementation of different URIs for every token
+contract TokenURI {
+  // mapping for token URIs
+  mapping(uint256 => string) private _tokenURIs;
 
+  function _tokenURI(uint256 tokenId) internal view returns (string memory) {
+  return _tokenURIs[tokenId];
+  }
+
+  function _setTokenURI(uint256 tokenId, string memory tokenUri) virtual internal {
+    _tokenURIs[tokenId] = tokenUri;
+  }
+}
+
+// File: openzeppelin-contracts-master/contracts/token/ERC1155/ERC1155.sol
 pragma solidity ^0.6.0;
 
 
@@ -648,7 +661,7 @@ pragma solidity ^0.6.0;
  *
  * _Available since v3.1._
  */
-contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI, TokenURI {
     using SafeMath for uint256;
     using Address for address;
 
@@ -870,17 +883,29 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
      * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
      * acceptance magic value.
      */
-    function _mint(address account, uint256 id, uint256 amount, bytes memory data) internal virtual {
+    function _mint(address account, uint256 tokenId, uint256 amount, string memory tokenUri, bytes memory data) internal virtual {
         require(account != address(0), "ERC1155: mint to the zero address");
 
         address operator = _msgSender();
 
-        _beforeTokenTransfer(operator, address(0), account, _asSingletonArray(id), _asSingletonArray(amount), data);
+        _beforeTokenTransfer(operator, address(0), account, _asSingletonArray(tokenId), _asSingletonArray(amount), data);
 
-        _balances[id][account] = _balances[id][account].add(amount);
-        emit TransferSingle(operator, address(0), account, id, amount);
+        _balances[tokenId][account] = _balances[tokenId][account].add(amount);
+        _setTokenURI(tokenId, tokenUri);
 
-        _doSafeTransferAcceptanceCheck(operator, address(0), account, id, amount, data);
+        emit TransferSingle(operator, address(0), account, tokenId, amount);
+
+        _doSafeTransferAcceptanceCheck(operator, address(0), account, tokenId, amount, data);
+    }
+
+    /**
+    * @dev Internal function to set the token URI for a given token.
+    * Reverts if the token ID does not exist.
+    * @param tokenId uint256 ID of the token to set its URI
+    * @param tokenUri string URI to assign
+    */
+    function _setTokenURI(uint256 tokenId, string memory tokenUri) internal override {
+      super._setTokenURI(tokenId, tokenUri);
     }
 
     /**

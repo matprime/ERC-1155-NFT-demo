@@ -53,17 +53,38 @@ class App extends Component {
     }
   }
 
-  mint = (hash) => {
-    this.state.contract.methods.mint(hash).send({ from: this.state.account })
+  mint = (hash, uri) => {
+    this.state.contract.methods.mint(hash,uri).send({ from: this.state.account })
     .once('receipt', (receipt) => {
       this.setState({
-        hashes: [...this.state.hashes, hash]
+        hashes: [...this.state.hashes, hash],
+        uris: [...this.state.hashes, uri]
       })
     })
+
     console.log("mint is done")
+    //const tokenURI = this.state.contract.methods.getTokenUri().call()
+    //.then(function(resp) {
+    //  console.log(resp)
+    //})
+    //console.log("tokenURI = " + tokenURI)
+
   }
 
   buy = (hash) => {
+    const web3 = window.web3
+    this.state.contract.methods.safeTransferFromWithProvision(
+      '0x6605f1b2A3482242DDE3B2D3fbAE8b7384D631EE',
+      '0x52745cD8E7F2E2D073B7c3F76a565eB6CF700BBB',
+      1,
+      1,
+      web3.utils.toWei('1' , 'wei'))
+    .call()
+    .then(function(resp) {
+      console.log(resp)
+    })
+    console.log('from: ' + '0x6605f1b2A3482242DDE3B2D3fbAE8b7384D631EE')
+    console.log('to: ' + '0x52745cD8E7F2E2D073B7c3F76a565eB6CF700BBB')
     console.log("buy of NFT with hash: " + hash + " is done")
   }
 
@@ -73,7 +94,9 @@ class App extends Component {
       account: '',
       contract: null,
       totalSupply: 0,
-      hashes: []
+      hashes: [],
+      uris: [],
+      owner: '0x8B190f0BcC72aB322eF9209030B4358eE71220E0'
     }
   }
 
@@ -103,7 +126,7 @@ class App extends Component {
                 <form onSubmit={(event) => {
                   event.preventDefault()
                   const hash = this.hash.value
-                  this.mint(hash)
+                  this.mint(hash,hash+'uri')
                 }}>
                   <input
                     type='text'
