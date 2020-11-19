@@ -76,6 +76,10 @@ contract('Memes', (accounts) => {
       let result3 = await contract.uri(1)
       assert.equal(result3, 'test1')
     })
+    //only owner of smart contract is able to change the uri of NFT
+    it('change URI onlyOwner', async () => {
+      await contract.setTokenUri(2, 'test2', { from: accounts[1] }).should.be.rejected
+    })
   })
 
   describe('transfering', async () => {
