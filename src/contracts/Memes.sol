@@ -1,8 +1,7 @@
-// contracts/Memes.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.0;
-
 import "./ERC1155.sol";
+
+pragma solidity >=0.6.0 <0.8.0;
 
 contract Memes is ERC1155 {
 
@@ -33,7 +32,7 @@ contract Memes is ERC1155 {
     return hashes.length;
   }
 
-  function getTokenUri(uint256 _tokenId) public view returns(string memory uri) {
+  function uri(uint256 _tokenId) public view override returns(string memory _uri) {
     return _tokenURI(_tokenId);
   }
 

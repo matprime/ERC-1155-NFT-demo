@@ -66,14 +66,14 @@ contract('Memes', (accounts) => {
 
   describe('URIs', async () => {
     it('retrieves URIs', async () => {
-      let result1 = await contract.getTokenUri(1)
+      let result1 = await contract.uri(1)
       assert.equal(result1, 'uri1')
-      let result2 = await contract.getTokenUri(2)
+      let result2 = await contract.uri(2)
       assert.equal(result2, 'uri2')
     })
     it('change URI', async () => {
       await contract.setTokenUri(1, 'test1')
-      let result3 = await contract.getTokenUri(1)
+      let result3 = await contract.uri(1)
       assert.equal(result3, 'test1')
     })
   })

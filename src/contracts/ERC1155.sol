@@ -635,13 +635,13 @@ library Address {
     }
 }
 
-// @dev Implementation of different URIs for every token
+// @dev Implementation for different URIs for every token
 contract TokenURI {
   // mapping for token URIs
   mapping(uint256 => string) private _tokenURIs;
 
   function _tokenURI(uint256 tokenId) internal view returns (string memory) {
-  return _tokenURIs[tokenId];
+    return _tokenURIs[tokenId];
   }
 
   function _setTokenURI(uint256 tokenId, string memory tokenUri) virtual internal {
@@ -715,8 +715,8 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI, TokenURI {
      * Clients calling this function must replace the `\{id\}` substring with the
      * actual token type ID.
      */
-    function uri(uint256) external view override returns (string memory) {
-        return _uri;
+    function uri(uint256 id) external view virtual override returns (string memory) {
+        return _tokenURI(id);
     }
 
     /**
